@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
         .mydiv1 {
@@ -47,38 +48,58 @@
             let ev = e || window.event;
             let xx = ev.clientX;
             let yy = ev.clientY;
-            this.setStyle(xx - x, yy - y)
+            this.setStyle(xx - x, yy - y);
         }
     }
     Drag.prototype.setStyle = function (leftNum, topNum) {
-        this.ele.style.left = leftNum + 'px';
-        this.ele.style.top = topNum + 'px';
+        this.ele.style.left = leftNum + "px";
+        this.ele.style.top = topNum + "px";
     }
     Drag.prototype.upFn = function () {
-        this.ele.onmouseup = function () {
-            this.ele.onmousemove = '';
+        this.ele.onmouseup = () => {
+            this.ele.onmousemove = "";
         }
     }
 
-    let mydiv1 = document.querySelector('.mydiv1');
-    let mydiv2 = document.querySelector('.mydiv2');
+    let mydiv1 = document.querySelector(".mydiv1");
+    // let mydiv2 = document.querySelector(".mydiv2");
     let drag1 = new Drag(mydiv1);
-    let drag2 = new Drag(mydiv2);
+    // let drag2 = new Drag(mydiv2);
+    // 继承；
 
-    // 面向过程；
-    // mydiv1.onmousedown = e => {
+    function LimitDrag(ele) {
+        Drag.call(this, ele);
+    }
+
+    // LimitDrag.prototype = Drag.prototype;
+    let Link = function () { };
+    LimitDrag.prototype = Drag.prototype;
+    LimitDrag.prototype = new Link();
+    LimitDrag.prototype.constructor = LimitDrag;
+
+    LimitDrag.prototype.setStyle = function (leftNum, topNum) {
+        leftNum = leftNum < 0 ? 0 : leftNum;
+        topNum = topNum < 0 ? 0 : topNum;
+        this.ele.style.left = leftNum + 'px';
+        this.ele.style.top = topNum + 'px';
+    }
+    let mydiv2 = document.querySelector('.mydiv2');
+    let drag2 = new LimitDrag(mydiv2);
+
+    //面向过程；
+    // mydiv1.onmousedown = e=>{
     //     let ev = e || window.event;
     //     let x = ev.clientX - mydiv1.offsetLeft;
     //     let y = ev.clientY - mydiv1.offsetTop;
-    //     mydiv1.onmousemove = e => {
+    //     mydiv1.onmousemove = e=>{
     //         let ev = e || window.event;
     //         let xx = ev.clientX;
     //         let yy = ev.clientY;
-    //         mydiv1.style.left = xx - x + 'px';
-    //         mydiv1.style.top = yy - y + 'px';
+    //         mydiv1.style.left = xx - x + "px";
+    //         mydiv1.style.top = yy - y + "px";
     //     }
-    //     mydiv1.onmouseup = function () {
-    //         mydiv1.onmousemove = '';
+    //     mydiv1.onmouseup = function(){
+    //         mydiv1.onmousemove = "";
     //     }
     // }
 </script>
