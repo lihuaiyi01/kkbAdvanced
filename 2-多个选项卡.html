@@ -24,61 +24,30 @@
         <p style="display: none;">内容二</p>
         <p style="display: none;">内容三</p>
     </div>
-
-    <button class="nextPre">点击我下一页</button>
-    <button class="autoPlay">点击我第二个选项卡自动轮播</button>
-
-    <script>
-        // 多个选项卡
-        // 第一个选项卡有 下一页 功能
-
-        function Tab(btns, ps, isNextPre = false, isAutoPlay = false) {
-            btns.forEach((value, key) => {
-                value.onclick = function () {
-                    psFor(key);
-                }
-            })
-            // 
-            if (isNextPre) {
-                let num = 0;
-                document.querySelector('.nextPre').onclick = function () {
-                    num++;
-                    num = num > 2 ? 0 : num;
-                    psFor(num);
-                }
-            }
-            // 
-            if (isAutoPlay) {
-                let num = 0;
-                document.querySelector('.autoPlay').onclick = function () {
-                    setInterval(() => {
-                        num++;
-                        num = num > 2 ? 0 : num;
-                        psFor(num);
-                    }, 1000)
-                }
-            }
-
-            function psFor(key) {
+</body>
+<script>
+    function Tab(btns, ps) {
+        btns.forEach((value, key) => {
+            value.onclick = function () {
                 ps.forEach((v, k) => {
                     if (key == k) {
-                        btns[k].style.background = 'red'
-                        ps[k].style.display = 'block'
+                        btns[k].style.background = 'red';
+                        ps[k].style.display = 'block';
                     } else {
-                        btns[k].style.background = ''
-                        ps[k].style.display = 'none'
+                        btns[k].style.background = '';
+                        ps[k].style.display = 'none';
                     }
                 })
             }
-        }
+        })
 
-        let btns = document.querySelectorAll('.tab1 button')
-        let ps = document.querySelectorAll('.tab1 p')
-        Tab(btns, ps, true, false)
-        let btns2 = document.querySelectorAll('.tab2 button')
-        let ps2 = document.querySelectorAll('.tab2 p')
-        Tab(btns2, ps2, false, true)
-    </script>
-</body>
+
+    }
+
+    let btns = document.querySelectorAll('.tab1 button');
+    let ps = document.querySelectorAll('.tab1 p');
+
+
+</script>
 
 </html>
