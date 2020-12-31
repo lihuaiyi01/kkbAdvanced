@@ -11,33 +11,47 @@
             padding: 0;
         }
 
-        body a {
+        .wrap a {
             text-decoration: none;
             color: #0d3a4b;
         }
 
-        .active {
-            color: #ffffff;
-        }
-
         .wrap {
+            position: relative;
             width: 700px;
             height: 500px;
             background-image: url(./images/bg.png);
             background-repeat: no-repeat;
             margin: 0 auto;
-            position: relative;
+        }
+
+        .ctrl {
+            position: absolute;
+            top: 100px;
+            left: 200px;
+        }
+
+        .ctrl div {
+            display: flex;
+            width: 300px;
+            height: 30px;
+            line-height: 30px;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .ctrl .active {
+            color: #fff;
         }
 
         .wrap #table {
-            width: 460px;
-            border-radius: 12px;
-            position: absolute;
-            left: 50%;
-            top: 160px;
-            transform: translateX(-50%);
             box-sizing: border-box;
-            overflow: hidden;
+            position: absolute;
+            top: 160px;
+            left: 50%;
+            width: 460px;
+            transform: translateX(-50%);
+            border-radius: 12px;
         }
 
         .wrap #table thead {
@@ -45,10 +59,10 @@
             height: 30px;
             line-height: 30px;
             text-align: center;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
             color: #fff;
             background: #4cbfe5;
+            border-top-left-radius: 12px;
+            border-bottom-right-radius: 12px;
         }
 
         .wrap #table thead a {
@@ -59,26 +73,8 @@
             color: #19c2ff;
         }
 
-        .wrap #table tbody a {
-            color: #19c2ff;
-        }
-
         .wrap #table tbody tr {
             background: #fff;
-        }
-
-        .ctrl {
-            position: absolute;
-            left: 200px;
-            top: 100px;
-        }
-
-        .ctrl div {
-            width: 300px;
-            line-height: 30px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
         }
     </style>
 </head>
@@ -86,7 +82,7 @@
 <body>
     <div class="wrap">
         <div class="ctrl">
-            <div class="age_sort nu">
+            <div class="age_sort">
                 <a href="javascript:;">年龄从小到大</a>
                 <a href="javascript:;">年龄从大到小</a>
                 <a href="javascript:;" class="active">默认排序</a>
@@ -108,16 +104,16 @@
             </thead>
             <tbody>
                 <!-- <tr>
-                        <th>0</th>
-                        <th>小明</th>
-                        <th>24</th>
-                        <th>男</th>
-                    </tr>      -->
+                    <th>0</th>
+                    <th>小明</th>
+                    <th>24</th>
+                    <th>男</th>
+                </tr> -->
             </tbody>
         </table>
     </div>
     <script>
-        // 数据    对象数组：
+        // 数据    对象数组；
         let data = [
             {
                 id: 0,
@@ -158,8 +154,8 @@
 
             // 渲染视图；
             function render(data) {
-                let str = "";
-                data.forEach((item, key) => {
+                let str = '';
+                data.forEach(item => {
                     str += `<tr>
                         <th>${item.id}</th>
                         <th>${item.name}</th>
@@ -167,70 +163,67 @@
                         <th>${item.gender}</th>
                     </tr>`;
                 })
-                document.querySelector("#table tbody").innerHTML = str;
+                document.querySelector('#table tbody').innerHTML = str;
             }
 
             let ageSort = [
-                () => {
+                (data) => {
                     // 年龄有小到大排列
                     data.sort((r1, r2) => r1.age - r2.age);
                 },
-                () => {
+                (data) => {
                     // 年龄有大到小排列
                     data.sort((r1, r2) => r2.age - r1.age);
                 },
-                () => {
+                (data) => {
                     // 通过id进行排列
                     data.sort((r1, r2) => r1.id - r2.id);
                 }
             ]
 
             let filterType = [
-                // 筛选男
-                () => {
-                    return data.filter(v => v.gender === '男')
-                },
-                // 筛选女
-                () => data.filter(v => v.gender === '女'),
-                // 默认
-                () => [...data]
+                (data) => data.filter(v => v.gender === '男'),
+                (data) => data.filter(v => v.gender === '女'),
+                (data) => [...data]
             ]
 
             //年龄排序
             ageEles.forEach((item, key) => {
                 item.onclick = function () {
-                    // console.log(item)
-                    //把所有其他的高亮去掉；
-                    ageEles.forEach(v => {
+                    // 高亮改变
+                    ageEles.forEach((v, k) => {
                         v.classList.remove('active')
                     })
                     this.classList.add('active')
-                    // console.log(this);
-                    ageSort[key]();
-                    // console.log(data);
-                    data = filterType[genderIndex]()
-                    // console.log(newData);
-                    render(data);
+                    // 年龄排序
+                    ageSort[key](data);
+                    // 年龄排序后进行所选性别排序
+                    let newData = filterType[genderIndex](data);
+                    render(newData);
+                    // 赋值所选年龄
                     sortIndex = key
                 }
-            })
-            // 性别筛选；
+            });
+
+            // 性别筛选
             genderEles.forEach((item, key) => {
                 item.onclick = function () {
-                    //把所有其他的高亮去掉；
-                    genderEles.forEach(v => {
+                    // 高亮改变
+                    genderEles.forEach((v, k) => {
                         v.classList.remove('active')
                     })
                     this.classList.add('active')
-                    let newData = filterType[key]();
-                    ageSort[sortIndex]();
-                    render(newData);
+                    // 性别筛选
+                    let newData = filterType[key](data);
+                    // 性别排序后进行所选年龄排序
+                    ageSort[sortIndex](data);
+                    render(newData)
+                    // 赋值所选性别
                     genderIndex = key
                 }
             })
 
             render(data);
-
         }
     </script>
 </body>
