@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 正则表达式；["12312","2312"]
+    // 字符串里找到对应的数字；
+    let str = "fdsafd12312dfaf3443fds2312dafd1111";
+
+    // 方式一；
+    // function getNumber(str) {
+    //     let arr = []
+    //     let temp = ""
+    //     for (let i = 0; i < str.length; i++) {
+    //         if (!isNaN(str[i])) {
+    //             temp += str[i]
+    //         } else {
+    //             if (temp != '') {
+    //                 arr.push(temp)
+    //                 temp = ""
+    //             }
+    //         }
+    //     }
+    //     if (temp != '') {
+    //         arr.push(temp)
+    //     }
+    //     return arr;
+    // }
+    // let res = getNumber(str);
+    // console.log(res);
+
+    // 正则实现；方式二； + 出现1次到多次； \d；数字；\D:非数字；
+    let reg = /\d+/g;
+    let arr = str.match(reg)
+    console.log(arr);
+</script>
+
+</html>
