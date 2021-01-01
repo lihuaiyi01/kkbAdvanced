@@ -209,9 +209,9 @@
                     // console.log(111);
                     // console.log(this);
                     argSort[key]();
-                    data = filterType[genderIndex]();
+                    let newData = filterType[genderIndex]();
                     console.log(data);
-                    render(data);
+                    render(newData);
                     sortIndex = key;
                 }
             })
