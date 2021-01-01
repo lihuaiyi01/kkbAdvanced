@@ -16,7 +16,7 @@
         <p style="display: none;">内容二</p>
         <p style="display: none;">内容三</p>
     </div>
-    <div class="tab1">
+    <div class="tab2">
         <button style="background: red;">按钮一</button>
         <button>按钮二</button>
         <button>按钮三</button>
@@ -24,24 +24,30 @@
         <p style="display: none;">内容二</p>
         <p style="display: none;">内容三</p>
     </div>
-    <script>
-        // 多个选项卡
-        let btns = document.querySelectorAll('.tab1 button')
-        let ps = document.querySelectorAll('.tab1 p')
+</body>
+<script>
+    function Tab(btns, ps) {
         btns.forEach((value, key) => {
             value.onclick = function () {
                 ps.forEach((v, k) => {
                     if (key == k) {
-                        btns[k].style.background = 'red'
-                        ps[k].style.display = 'block'
+                        btns[k].style.background = 'red';
+                        ps[k].style.display = 'block';
                     } else {
-                        btns[k].style.background = ''
-                        ps[k].style.display = 'none'
+                        btns[k].style.background = '';
+                        ps[k].style.display = 'none';
                     }
                 })
             }
         })
-    </script>
-</body>
+
+
+    }
+
+    let btns = document.querySelectorAll('.tab1 button');
+    let ps = document.querySelectorAll('.tab1 p');
+
+
+</script>
 
 </html>
