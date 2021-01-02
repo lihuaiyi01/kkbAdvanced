@@ -7,18 +7,18 @@
     <title>Document</title>
     <style>
         .mydiv1 {
+            position: absolute;
             width: 100px;
             height: 100px;
-            background: red;
-            position: absolute;
+            background-color: red;
         }
 
         .mydiv2 {
+            position: absolute;
             width: 100px;
             height: 100px;
-            background: blue;
-            position: absolute;
             left: 300px;
+            background-color: blue;
         }
     </style>
 </head>
@@ -47,7 +47,7 @@
             let ev = e || window.event;
             let xx = ev.clientX;
             let yy = ev.clientY;
-            this.setStyle(xx - x, yy - y)
+            this.setStyle(xx - x, yy - y);
         }
     }
     Drag.prototype.setStyle = function (leftNum, topNum) {
@@ -59,13 +59,13 @@
             this.ele.onmousemove = '';
         }
     }
-
-    let mydiv1 = document.querySelector('.mydiv1');
-    let mydiv2 = document.querySelector('.mydiv2');
-    let drag1 = new Drag(mydiv1);
-    let drag2 = new Drag(mydiv2);
+    let mydiv1 = document.querySelector('.mydiv1')
+    let mydiv2 = document.querySelector('.mydiv2')
+    let drag1 = new Drag(mydiv1)
+    let drag2 = new Drag(mydiv2)
 
     // 面向过程；
+    // let mydiv1 = document.querySelector('.mydiv1')
     // mydiv1.onmousedown = e => {
     //     let ev = e || window.event;
     //     let x = ev.clientX - mydiv1.offsetLeft;

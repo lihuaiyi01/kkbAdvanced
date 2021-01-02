@@ -12,7 +12,6 @@
 
 </body>
 <script>
-
     function Dad(height) {
         this.name = "张三";
         this.age = 20;
@@ -20,7 +19,7 @@
         this.money = "$1000000";
     }
     Dad.prototype.hobby = function () {
-        console.log('喜欢高尔夫');
+        console.log("喜欢高尔夫");
     }
 
     function Son(height) {
@@ -30,14 +29,12 @@
     }
     Son.prototype = Dad.prototype;
     Son.prototype.hobby = function () {
-        console.log('篮球');
+        console.log("篮球");
     }
-
     let newSon = new Son("178cm");
     // console.log(newSon);
     newSon.hobby();
-
-    let newDad = new Dad('179cm');
+    let newDad = new Dad("179cm");
     newDad.hobby();
 </script>
 
