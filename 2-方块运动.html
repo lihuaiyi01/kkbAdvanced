@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+<script>
+    function move(ele, arg, target, cb) {
+        let start = parseInt(window.getComputedStyle(ele, null)[arg]);
+        let dis = (target - start) / Math.abs(target - start)
+        // console.log(dis);
+        let speed = dis * 5
+
+        function fn() {
+            let now = parseInt(window.getComputedStyle(ele, null)[arg])
+            if (now === target) {
+                // console.log('运动完成');
+                cb && cb('运动完成')
+            } else {
+                ele.style[arg] = now + speed + 'px'
+                window.requestAnimationFrame(fn)
+            }
+        }
+        fn()
+    }
+    let ele = document.querySelector('.box')
+    move(ele, 'left', 200, function (res) {
+        move(ele, 'top', 200, function (res) {
+            move(ele, 'left', 0, function () {
+                move(ele, 'top', 0, function () {
+                    console.log(res);
+                })
+            })
+        })
+    })
+</script>
+
+</html>
