@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,3 +12,43 @@
     <h1>测试标题</h1>
 </body>
 </html>
+=======
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='./mvvm2.js' type='text/javascript'></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        11 {{message}} 111
+        <div>
+            111
+            <div>
+                {{message}}
+            </div>
+            <div v-html='htmlData'></div>
+            <input v-model='modelData' /> {{modelData}}
+        </div>
+    </div>
+</body>
+<script>
+    let vm = new Kvue({
+        el: '#app',
+        data: {
+            message: '测试数据',
+            htmlData: 'html数据',
+            modelData: '绑定的数据'
+        }
+    })
+
+    setTimeout(() => {
+        console.log('settimeout...');
+        vm.$options.data.message = '修改的数据'
+    }, 1000)
+</script>
+
+</html>
+>>>>>>> 03_2_ES6Senior
