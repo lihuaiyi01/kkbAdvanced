@@ -6,28 +6,30 @@ window.onload = function () {
         v.onmouseover = function () {
             spans.forEach((value, key) => {
                 if ((key + 1) == k) {
-                    spans[key].style.display = "block";
+                    spans[key].style.display = 'block'
                 } else {
-                    spans[key].style.display = "none";
+                    spans[key].style.display = 'none'
                 }
             })
         }
     })
 
     //设置localStorage；
-    // localStorage.setItem("test","测试文字");
-    // localStorage.setItem("test1","测试文字1");
+    // localStorage.setItem("test", "测试文字");
+    // localStorage.setItem("test1", "测试文字");
     //读取localStorage；
     // console.log(localStorage.getItem("test"));
     //清除localStorage
     // localStorage.removeItem("test");
     //清除所有localStorage
     // localStorage.clear();
+
     // document.cookie = "test2=test2;Max-Age=3600";
     // console.log(document.cookie);
+
     let colorArr = ["white", "rgb(204,232,207)", "rgb(200,200,169)", "rgb(114,111,128)"];
     let key = 0;
-    // if(getCookie("key")){
+    // if (getCookie("key")) {
     //     key = getCookie("key");
     // }
     if (localStorage.getItem("key")) {
@@ -37,9 +39,9 @@ window.onload = function () {
     document.querySelector(".changeSkin").onclick = function () {
         key++;
         key = key > 3 ? 0 : key;
-        // setCookie("key",key,{
-        //     "Max-Age":3600*24
-        // });
+        // setCookie("key", key, {
+        //     "Max-Age": 3600 * 24
+        // })
         localStorage.setItem("key", key);
         document.body.style.background = colorArr[key];
     }
@@ -70,13 +72,12 @@ function getCookie(name) {
 function showDetail(musicData) {
     // console.log(musicData);
     if (localStorage.getItem("musicData")) {
-        //除重
+        // 去重
         let localData = JSON.parse(localStorage.getItem("musicData"));
         if (!localData.find(v => v.id == musicData.id)) {
             localData.push(musicData);
             localStorage.setItem("musicData", JSON.stringify(localData));
         }
-
     } else {
         localStorage.setItem("musicData", JSON.stringify([musicData]));
     }
@@ -86,4 +87,3 @@ function showDetail(musicData) {
         window.open("/detail");
     }
 }
-
