@@ -8,7 +8,27 @@
 </head>
 
 <body>
-
+    <h1>主页</h1>
+    <button class="btnPost">点击发送post请求</button>
+    <button class="btnXml">点击接收xml数据</button>
+    <form action="" enctype="application/x-www-form-urlencoded"></form>
 </body>
+<script>
+    // 主流的数据传输格式：json；xml；
+    // 无刷
+    document.querySelector('.btnPost').onclick = function () {
+        let xhr = new XMLHttpRequest()
+        // 
+        xhr.open('post', '/post', true)
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.onload = function () {
+            console.log(xhr.responseText);
+        }
+        // let data = 'name=zhangsan&age=20'
+        let data = JSON.stringify({ name: 'zhangsan', age: 20 })
+        xhr.send(data)
+    }
+</script>
 
 </html>
