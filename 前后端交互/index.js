@@ -15,6 +15,24 @@ app.use(koaBody({
 router.get('/', (ctx, next) => {
     ctx.body = 'hello'
 })
+router.get("/checkUserName", (ctx, next) => {
+    console.log(ctx.query.username);
+    let res = usersData.find(v => v.username == ctx.query.username);
+    if (res) {
+        ctx.body = {
+            status: 1,
+            info: "用户名正确"
+        };
+    } else {
+        ctx.body = {
+            status: 2,
+            info: "用户名错误"
+        };
+    }
+})
+router.get('/get/:id', (ctx, next) => {
+
+})
 router.post("/upload", (ctx, next) => {
     // console.log(ctx.request.body);
     // console.log(ctx.request.files.img);
