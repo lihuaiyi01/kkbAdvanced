@@ -8,9 +8,7 @@ let app = new Koa()
 let router = new Router()
 
 app.use(static(__dirname + '/static'))
-app.use(koaBody({
-    multipart: true
-}))
+app.use(koaBody())
 
 router.get('/', (ctx, next) => {
     ctx.body = 'hello'
@@ -31,7 +29,18 @@ router.get("/checkUserName", (ctx, next) => {
     }
 })
 router.get('/get/:id', (ctx, next) => {
-
+    console.log(ctx.params);
+    ctx.body = {
+        status: 1,
+        info: '请求成功'
+    }
+})
+router.post('/post', (ctx, next) => {
+    console.log(ctx.request.body);
+    ctx.body = {
+        status: 1,
+        info: "post请求成功"
+    }
 })
 router.post("/upload", (ctx, next) => {
     // console.log(ctx.request.body);
