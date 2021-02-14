@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+    <div class="loginContainer">
+        <h1>登录</h1>
+        <form action="/checkUser" method="post">姓名：
+            <input type="text" name="username" class="inputStyle" />
+            <div class="exchange">用户名错误</div>
+            <br />密码：
+            <input type="password" name="pwd" class="inputStyle" />
+            <br />
+            <input type="submit" value="登录" class="loginStyle">
+        </form>
+    </div>
+</body>
+
+</html>
