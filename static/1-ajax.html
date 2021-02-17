@@ -14,7 +14,11 @@
     let btn = document.querySelector('button')
     btn.onclick = function () {
         let xhr = new XMLHttpRequest()
+<<<<<<< HEAD:static/1-ajax.html
         xhr.open('get', 'http://localhost:4000/getAjax', true)
+=======
+        xhr.open('get', '/get/4', true)
+>>>>>>> 07_0_1_FBInter:前后端交互/static/get.html
         xhr.onload = function () {
             console.log(xhr.responseText);
         }
